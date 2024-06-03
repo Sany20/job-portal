@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Details</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-card {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .job-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .job-card p {
+      margin: 0;
+    }
+
+    .details-button {
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .details-button:hover {
+      background-color: #45a049;
+    }
+    nav {
+        background-color: #333;
+        overflow: hidden;
+    }
+  
+    nav a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+  
+    nav a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    .logout {
+        float: right;
+    }
+    @media (max-width: 600px) {
+        nav a {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+  
+        .logout {
+            float: none;
+            text-align: right;
+        }
+    }
+  </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'applicant' %}">Home</a>
+        <a href="#">See Progress</a>
+        <a href="/" class="logout">Logout</a>
+    </nav>
+  <div class="container">
+    <div class="job-card">
+      <h2>{{ job.job_title }}</h2>
+      <p><strong>Location:</strong> {{ job.address }}</p>
+      <p><strong>Salary Range:</strong> ${{ job.salary_low }} - ${{ job.salary_high }}</p>
+      <p><strong>Last Date:</strong> {{ job.last_date }}</p>
+    </div>
+
+    <div class="job-card">
+      <h2>About {{ company.company_name }}</h2>
+      <p>{{ company.about_company }}</p>
+      <p><strong>Founder:</strong> {{ company.founder_name }}</p>
+      <p><strong>Headquarters Location:</strong> {{ company.headquarters_location }}</p>
+    </div>
+      <!-- Display Apply/Already Applied button based on user's application status -->
+    
+    <a href="{% url 'apply_job' job.id %}" class="details-button">Apply Now</a>
+  </div>
+</body>
+</html>
